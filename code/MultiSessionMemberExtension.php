@@ -20,6 +20,18 @@ class MultiSessionMemberExtension extends DataExtension {
         $this->addToTokenList();
     }
 
+    public function memberAutoLoggedIn() {
+
+        // Try to get the used/old token from the $_COOKIE array
+        if ($_COOKIE['alc_enc']) {
+            list($uid, $usedToken) = explode(':', $_COOKIE['alc_enc'], 2);
+
+            // Update the DB entry, replace the old token/hash with the new one
+            $this->updateTokenList($usedToken);
+        } else
+            $this->addToTokenList();
+    }
+
     public function beforeMemberLoggedOut() {
         $hash = $this->getRememberLoginToken();
 
@@ -39,7 +51,7 @@ class MultiSessionMemberExtension extends DataExtension {
 
         // Get member
         $member = Member::get()->byID($uid);
-        if(!$member) return null;
+        if (!$member) return null;
 
         // Check for corresponding db entry
         $rememberToken = $member
@@ -49,6 +61,20 @@ class MultiSessionMemberExtension extends DataExtension {
 
         // Return hash
         return $rememberToken ? $rememberToken->Hash : null;
+    }
+
+    private function updateTokenList($usedToken) {
+
+        // Try to update an existing entry
+        if ($entry = $this->owner->RememberLoginTokens()->filter('Token', $usedToken)->first()) {
+            list($uid, $token) = explode(':', Cookie::get('alc_enc'), 2);
+
+            $entry->Hash = $this->getRememberLoginToken();
+            $entry->Token = $token;
+            $entry->write();
+        } else
+            // Add new entry if update failed
+            $this->addToTokenList();
     }
 
     private function addToTokenList() {
