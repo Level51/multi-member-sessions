@@ -1,7 +1,7 @@
 {
   "name": "level51/silverstripe-multi-member-sessions",
-  "version": "0.1.0",
-  "time": "2016-11-15",
+  "version": "0.1.1",
+  "time": "2016-12-01",
   "description": "Multiple concurrent member sessions for SilverStripe",
   "type": "silverstripe-module",
   "license": "MIT",
@@ -9,6 +9,10 @@
     {
       "name": "Julian Scheuchenzuber",
       "email": "js@lvl51.de"
+    },
+    {
+      "name": "Daniel Kliemsch",
+      "email": "dk@lvl51.de"
     }
   ]
 }
