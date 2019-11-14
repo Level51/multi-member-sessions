@@ -1,7 +1,7 @@
 # Change log
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.1.2]
 ### Fixed
 - Check for proper token format before trying to extract the data
 

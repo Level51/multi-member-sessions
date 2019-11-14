@@ -1,7 +1,7 @@
 {
   "name": "level51/silverstripe-multi-member-sessions",
-  "version": "0.1.1",
-  "time": "2016-12-01",
+  "version": "0.1.2",
+  "time": "2019-11-14",
   "description": "Multiple concurrent member sessions for SilverStripe",
   "type": "silverstripe-module",
   "license": "MIT",
