@@ -46,6 +46,10 @@ class MultiSessionMemberExtension extends DataExtension {
         if (!($cookie = Cookie::get('alc_enc')))
             return null;
 
+        // Check for proper format, return otherwise
+        if (strpos($cookie, ':') === false)
+            return null;
+
         // Try to fetch cookie data
         list($uid, $token) = explode(':', $cookie, 2);
 
